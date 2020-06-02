@@ -2,7 +2,7 @@
 
 Initially building my own version in Unity by following [this explanation by Boris](https://www.boristhebrave.com/2020/04/13/wave-function-collapse-explained/)
 
-Longer form updates [found here](https://docs.google.com/document/d/1ry2Ay96Y_0STi4RvNOvEKh2qi_g7ikyD3FMVaGFru7E/edit?usp=sharing)
+Longer form updates [found here](https://docs.google.com/document/d/1ry2Ay96Y_0STi4RvNOvEKh2qi_g7ikyD3FMVaGFru7E/edit?usp=sharing) (google docs)
 
 Other assortment of links I have read and might reference to:
 - [Another article by Boris](https://www.boristhebrave.com/2020/02/08/wave-function-collapse-tips-and-tricks/)
