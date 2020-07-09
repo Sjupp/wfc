@@ -151,7 +151,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gridSize: 3
-  cellPrefab: {fileID: 5338561608632853909, guid: 69390b48614bd964f948bc867c1bf7fe,
+  gridArray: []
+  cellPrefab: {fileID: 5338561608632853909, guid: a555be47c12818544b5ccae6ab40051d,
     type: 3}
   cellVisualizer: {fileID: 2008240437339657880, guid: 70e004adff4109d4f94d2777a5e6dd58,
     type: 3}

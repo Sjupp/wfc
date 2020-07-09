@@ -23,7 +23,17 @@ public class Cell : MonoBehaviour
 
         for (int i = 0; i < 4; i++)
         {
-            _ = inputNumber == i ? domain[i] = true : domain[i] = false;
+            //_ = inputNumber == i ? domain[i] = true : domain[i] = false;
+
+            if (inputNumber == i)
+            {
+                domain[i] = true;
+            }
+            else
+            {
+                domain[i] = false;
+                gameObject.GetComponent<CellVisualizer>().RemoveOne(i);
+            }
         }
     }
 
