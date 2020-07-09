@@ -5,21 +5,20 @@ using UnityEngine;
 public class Cell : MonoBehaviour
 {
     // Hard coded to four tiles
-    bool[] domain;
-
-    public void Awake()
+    [SerializeField]
+    public bool[] domain;
+    private void Awake()
     {
-        InitializeCells();
-    }
-
-    public void InitializeCells()
-    {
-        domain = new bool[] { true, true, true, true };
+        domain = new bool[4] { true, true, true, true };
     }
 
     public void CollapseCellTo(int inputNumber)
     {
-        if (inputNumber > domain.Length) return;
+        if (inputNumber >= domain.Length)
+        {
+            Debug.LogWarning("Input number out of bounds");
+            return;
+        }
 
         for (int i = 0; i < 4; i++)
         {
@@ -39,14 +38,10 @@ public class Cell : MonoBehaviour
 
     public void RemoveOne(int inputNumber)
     {
-        if (inputNumber > domain.Length) return;
+        Debug.Log("removeOne: " + inputNumber);
+        if (inputNumber >= domain.Length) return;
 
-        for (int i = 0; i < 4; i++)
-        {
-            if (inputNumber == i) { 
-                domain[i] = false;
-                gameObject.GetComponent<CellVisualizer>().RemoveOne(i);
-            }
-        }
+        domain[inputNumber] = false;
+        gameObject.GetComponent<CellVisualizer>().RemoveOne(inputNumber);
     }
 }

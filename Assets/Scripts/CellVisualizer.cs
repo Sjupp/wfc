@@ -42,6 +42,7 @@ public class CellVisualizer : MonoBehaviour
 
         if (arrayWithObj[number])
         {
+            Debug.Log("Destroying object " + number);
             DestroyImmediate(arrayWithObj[number]);
         }
         else

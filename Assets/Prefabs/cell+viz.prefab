@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b33d386bf269bf4f9be88e766fe9335, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  domain: 
 --- !u!114 &1179082489830178029
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,4 +62,5 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 04857be947a5c2944a83366c58fad687, type: 2}
   - {fileID: 2100000, guid: e1a2b803ff92d474c999214014a557fa, type: 2}
   - {fileID: 2100000, guid: 923443bffa1116e44a40c6f20933ea92, type: 2}
-  - {fileID: 2100000, guid: 2267b2253666f4640ba13941a6cf29bc, type: 2}
+  - {fileID: 2100000, guid: 5c45d8e6b237e83418c28546e7d452e8, type: 2}
+  arrayWithObj: []

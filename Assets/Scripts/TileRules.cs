@@ -2,10 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-//public class Tile
-//{
-//    int[] sides;
-//}
+public class Tile
+{
+    public string m_name;
+    public int[] m_sides;
+
+    public Tile(string name, int[] sides)
+    {
+        m_name = name;
+        m_sides = sides;
+    }
+}
 
 // Side order: R > U > L > D
 public class Tile_0 // Plain

@@ -9,12 +9,18 @@ public class GridGenerator : MonoBehaviour
     public GameObject[] gridArray;
     public GameObject cellPrefab;
     public CellVisualizer cellVisualizer;
+    public Tile[] tiles;
 
     private IEnumerator coroutine;
-    private float timeStamp;
+    //private float timeStamp;
 
     void Start()
     {
+        tiles = new Tile[4] { new Tile("plain", new int[] { 0, 0, 0, 0 }),
+                              new Tile("vertical", new int[] { 0, 1, 0, 1 }),
+                              new Tile("horizontal", new int[] { 1, 0, 1, 0 }),
+                              new Tile("crossing", new int[] { 1, 1, 1, 1 }),};
+
         gridArray = new GameObject[gridSize * gridSize];
         GenerateGrid();
 
@@ -28,18 +34,83 @@ public class GridGenerator : MonoBehaviour
     {
         yield return new WaitForSeconds(waitTime);
 
-        // Collapse One "random" Cell
-        gridArray[4].GetComponent<Cell>().CollapseCellTo(4);
+        Debug.Log("Start");
+        // Pick a cell and collapse it
+        gridArray[0].GetComponent<Cell>().CollapseCellTo(3);
 
-        for (int i = 0; i < 4; i++)
+        //for (int i = 0; i < gridArray.Length; i++)
+        //{
+        //    Foo(i);
+        //}
+
+        Foo(1);
+
+        // Collapse One "random" Cell
+        //gridArray[4].GetComponent<Cell>().CollapseCellTo(4);
+
+        //for (int i = 0; i < 4; i++)
+        //{
+        //    var neighborTargetPos = GetNeighborForPosition(4, i);
+        //    Debug.Log(neighborTargetPos);
+        //    if (neighborTargetPos >= 0)
+        //    {
+        //        Selection.activeGameObject = gridArray[neighborTargetPos];
+        //    }
+        //    yield return new WaitForSeconds(0.1f);
+        //}
+    }
+
+    void Foo(int gridPos)
+    {
+        Debug.Log("Foo " + gridPos);
+        // Check next cell in array
+        var nextCell = gridPos;
+        // Get neighbor of cell (in this case, the one we just collapsed)
+        for (int dir = 0; dir < 4; dir++)
         {
-            var neighborTargetPos = GetNeighborForPosition(4, i);
-            Debug.Log(neighborTargetPos);
-            if (neighborTargetPos >= 0)
+            Debug.Log("direction: " + dir);
+            var directionChecked = dir;
+
+            var nbr = GetNeighborForPosition(nextCell, directionChecked);
+            if (nbr <= -1)
             {
-                Selection.activeGameObject = gridArray[neighborTargetPos];
+                Debug.Log("bad neighbor, returning");
+                return;
+            };
+
+            // Get our domain for future reference
+            var ourCell = gridArray[nextCell].GetComponent<Cell>();
+
+            // Check neighbor's domain
+            var nbrDomain = gridArray[nbr].GetComponent<Cell>().domain;
+
+            // Check stuff
+            for (int i = 0; i < nbrDomain.Length; i++)
+            {
+                if (nbrDomain[i]) // true == tile still a possibility
+                {
+                    // If domain 0 is true, that means tile 0 is a possibility.
+                    // Since we checked from direction directionChecked, we are interested in the opposite dir to match sides.
+                    var opp = (directionChecked + 2) % 4;
+
+                    // Check each Tile[i].side[opp] up against our domain's Tile[j] sided [directionChecked]
+                    for (int j = 0; j < ourCell.domain.Length; j++) // our domain vs nbrDomain should always be same size
+                    {
+                        // TileRule[i] should correspond to nbrDomain[i]
+                        if (tiles[i].m_sides[opp] == tiles[j].m_sides[directionChecked])
+                        {
+                            // We have a match! You get to live.
+                            Debug.Log($"{tiles[i].m_name} matches with {tiles[j].m_name}");
+                        } 
+                        else
+                        {
+                            // No match >:(
+                            Debug.Log($"{tiles[i].m_name} does not match with {tiles[j].m_name}");
+                            ourCell.RemoveOne(j);
+                        }
+                    }
+                }
             }
-            yield return new WaitForSeconds(0.1f);
         }
     }
 
